@@ -1,6 +1,6 @@
 {
   "name": "simulateauth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simulation de systeme d'authentification complete sans base de donnees en se servirant de tableaux javascript",
   "main": "index.js",
   "scripts": {

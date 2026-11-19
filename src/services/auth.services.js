@@ -1,8 +1,8 @@
 //services qui vont utiliser les repository pour faire des traitements metier et retourner les resultats aux controllers
 
-import { createUser, findByUsername, findByEmail } from "../repositories/user.repository";
-import { hashPassword } from "../utils/passwordHash";
-import { userValidator } from "../validators/user.validator";
+import { createUser, findByUsername, findByEmail } from "../repositories/user.repository.js";
+import { hashPassword } from "../utils/passwordHash.js";
+import { userValidator } from "../validators/user.validator.js";
 
 const registerUser = async(username, email, password) => {
     //valider les donnees
@@ -12,21 +12,21 @@ const registerUser = async(username, email, password) => {
     }
 
     //check if email or username already exists
-    const usernameExists = findByUsername(validatedData.username);
+    const usernameExists = await findByUsername(validatedData.username);
     if(usernameExists){
         throw new Error("Username not available. Please choose another");
     };
 
-    const emailExists = findByEmail(validatedData.email);
+    const emailExists = await findByEmail(validatedData.email);
     if(emailExists){
         throw new Error(" Email already exits. Please login")
     };
 
     // hash the password
-    const hashedPassword = hashPassword(validatedData.password);
+    const hashedPassword =  await hashPassword(validatedData.password);
 
     //register a user
-    const registeredUser =  createUser(validatedData.username , validatedData.email,hashedPassword);
+    const registeredUser =  await createUser(validatedData.username , validatedData.email,hashedPassword);
     
 
     return registeredUser;

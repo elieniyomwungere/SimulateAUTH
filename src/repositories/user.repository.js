@@ -1,5 +1,5 @@
 // Le seul module a acceder a la base de donnee : pour notre cas qui accede au data 
-import users from "../data/user";
+import users from "../data/user.js";
 
 const createUser = async (username, email , password) =>{
 

@@ -2,10 +2,14 @@
 import express from 'express';
 import userRoutes from './routes/user.routes.js';
 import loggerMiddleware from './middlewares/logger.middleware.js';
+import errorHandlerMiddleware from './middlewares/error.middleware.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const port = Number(process.env.PORT) || 3000;
-const host = process.env.HOST ?? "127.0.0.1";
+const host = process.env.HOST ?? "0.0.0.0";
 
 //Middlewares
 app.use(loggerMiddleware);
@@ -22,6 +26,7 @@ app.get('/health',(req, res) => {
         message: "Server is running",
     })
 })
+
 //middleware d'erreurs
 app.use(errorHandlerMiddleware);
 

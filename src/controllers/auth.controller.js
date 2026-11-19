@@ -1,5 +1,5 @@
 // Controller utilise les services et renvoie au routes.
-import { registerUser } from "../services/auth.services";
+import { registerUser } from "../services/auth.services.js";
 
 const registerController = async(req, res) => {
     
@@ -14,9 +14,7 @@ const registerController = async(req, res) => {
         });
     })
     .catch((error) => {
-        res.status(400).json({
-            message: error.message
-        });
+        throw error; // This will be caught by the error handling middleware
     });
 }
 
